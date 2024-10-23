@@ -1,9 +1,11 @@
-console.log("debut utils.js")
-module.exports ={
-    f1:  ()=>{
-        console.log("salam EStf")
-    },
-    chaine:"salut"
+const somme = (a,b)=>a+b
+const PI = 22/7
+// exportez somme, user et PI
+module.exports = {
+    sum : somme,
+    PI,// PI:PI
+    user:{
+        nom:"mehdi",
+        age:32
+    }
 }
-
-console.log("fin utils.js")
