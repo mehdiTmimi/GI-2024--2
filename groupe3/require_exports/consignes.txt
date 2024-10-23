@@ -1,0 +1,19 @@
+- programmation modulaire
+en node.js on a deux manieres =>
+1- en utilisant require et exports
+* tout fichier avec l extension .js est considere un module
+=> au moment de l execution d un fichier js , vous aurez acces a un objet
+automatiquement cree appele module
+=> cet objet contient bcp d'attribut, ce qui nous interesse c'est l'attribut
+exports
+* dans cet attribut vous devez mettre ce que vous voulez exposer (exporter)
+a l exterieur
+* pour importer (recuperer le contenu du export d un module) => utilisez
+la fonction require
+exemple: voir (utils.js et main.js)
+REMARQUE !!!!!
+- la fonction require execute le fichier specifie puis vous retourne
+son exports
+- la fonction require est utilise meme pour importer les cores modules et
+third party modules
+2- en utilisant import et export (a voir apres)

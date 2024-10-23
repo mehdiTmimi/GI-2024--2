@@ -1,0 +1,5 @@
+- IDE : vscode
+- Environnement de dev: Node.js => https://nodejs.org/en
+=> pour verifier l'installation, dans l'invite de commande tapez (cmd): 
+node -v
+npm --version
