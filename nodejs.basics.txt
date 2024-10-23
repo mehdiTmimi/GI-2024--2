@@ -1,0 +1,12 @@
+node.js c est un Environnement d'execution pour js
+=> Attention ! c est pas un framework, bibliotheque, langage ...
+=> cross plateform : tu peux developper avec node.js 
+avec une machine windows, mac ou linux
+=> free (gratuit) et open source
+
+cree par Ryan DAHL
+sortie officielle etait en 2009
+=> vague explication: il a pris le moteur V8 (js Engine) 
+de google puis il l'a encapsule dans un programme en C++ 
+=> ce programme est le Node.js
+
