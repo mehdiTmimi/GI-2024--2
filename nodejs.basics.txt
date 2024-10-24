@@ -1,4 +1,4 @@
-node.js c est un Environnement d'execution pour js
+node.js est un Environnement d'execution pour js
 => Attention ! c est pas un framework, bibliotheque, langage ...
 => cross plateform : tu peux developper avec node.js 
 avec une machine windows, mac ou linux

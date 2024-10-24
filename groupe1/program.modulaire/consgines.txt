@@ -1,0 +1,11 @@
+on a deux manieres:
+1- require + module.exports
+=> en node.js, tout fichier avec extension .js est considere
+comme un module
+=> dans chaque module, un objet 'module' est creee automatiquement
+=> cet objet 'module' contient une propriete 'exports'
+=> tout le contenu de exports il sera exporte
+=> pour importer un module, utilisez la fonction require
+=> require('./file.js'): execute le module file.js puis faire retournir 
+le contenu du exports (file.js)
+2- import et export
