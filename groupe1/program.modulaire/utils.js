@@ -5,8 +5,8 @@ const somme = (a, b) => a + b
 const admin = { nom: "ali", age: 45 }
 console.log("fin utils")
 module.exports ={
-    PI,
-    PORT,
+    PI : PI,
+    p : PORT,
     somme,
     admin
 }
