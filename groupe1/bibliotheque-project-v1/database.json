@@ -1,0 +1,16 @@
+{
+  "books": [
+    {
+      "ref": "CX13",
+      "name": "antigone",
+      "author": "Jean Anouilh",
+      "date": 1942
+    },
+    {
+        "ref": "FE32",
+        "name": "dernier jour d'un condamné",
+        "author": "Victor hugo",
+        "date": 1892
+      }
+  ]
+}
