@@ -1,0 +1,19 @@
+{
+    "users" :[
+        {
+          "id": "cd123",
+          "name": "mehdi",
+          "age": 32
+        },
+        {
+          "id": "cs233",
+          "name": "sarah",
+          "age": 20
+        },
+        {
+          "id": "er345",
+          "name": "kenza",
+          "age": 26
+        }
+      ]
+}

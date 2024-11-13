@@ -7,6 +7,7 @@ const fs = require("fs")
 const PORT = 3000
 
 const server = http.createServer((req, res) => {
+    req.on('')
     const { url, method } = req // url = path
     // ajout d'un livre : first => headers
     if (method == "GET" && url.toLowerCase() == "/add1") {
