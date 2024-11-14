@@ -1,11 +1,23 @@
 const http = require("http")
+const fs = require("fs")
 const PORT1 = 3000
 
 const server = http.createServer((req, res) => {
     const { url, method } = req
     if (method == "GET" && url == "/es") {
-        res.write("list users")
-        return res.end()
+        return fs.promises.readFile("./database.json")
+            .then(data => {
+                res.setHeader("Content-Type", "application/json")
+                /*let obj = JSON.parse(data)
+                let { books } = obj; // let books = obj.books*/
+                let {books} = JSON.parse(data)
+                res.write(JSON.stringify(books))
+                res.end()
+            })
+            .catch(e => {
+                console.log(e)
+                send500Response(res)
+            })
     }
     // http://localhost:3000/a/cd123 , http://localhost:3000/a/oook
     if ((method == "POST" || method == "PUT") && url.startsWith("/a/")) {
@@ -20,10 +32,17 @@ const server = http.createServer((req, res) => {
         msg: "contenu introuvable",
         path: url
     }
-    res.setHeader("Content-Type","application/json")
+    res.setHeader("Content-Type", "application/json")
     res.write(JSON.stringify(msgToSend))
     res.end()
 })
-
+const send500Response = (res) => {
+    res.statusCode = 500
+    res.setHeader("Content-Type", "application/json")
+    res.write(JSON.stringify({
+        msg: "problem in the server"
+    }))
+    res.end()
+}
 
 server.listen(PORT1, () => console.log(`server1 started at ${PORT1}`))
