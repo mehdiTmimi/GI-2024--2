@@ -10,7 +10,7 @@ const server = http.createServer((req, res) => {
                 res.setHeader("Content-Type", "application/json")
                 /*let obj = JSON.parse(data)
                 let { books } = obj; // let books = obj.books*/
-                let {books} = JSON.parse(data)
+                let { books } = JSON.parse(data)
                 res.write(JSON.stringify(books))
                 res.end()
             })
@@ -22,8 +22,32 @@ const server = http.createServer((req, res) => {
     // http://localhost:3000/a/cd123 , http://localhost:3000/a/oook
     if ((method == "POST" || method == "PUT") && url.startsWith("/a/")) {
         let id = url.split("/")[2]
-        res.write(`user id : ${id}`)
-        return res.end()
+        return fs.promises.readFile("./database.json")
+            .then(data => JSON.parse(data.toString()))
+            .then(data => data.books)
+            .then(tab => tab.find(ele => ele.ref == id))
+            .then(resultat => {
+                if (resultat) // resultat != undefined
+                {
+                    res.statusCode = 200
+                    res.setHeader("Content-Type", "application/json")
+                    res.write(JSON.stringify(resultat))
+                    res.end()
+                }
+                else {
+                    res.statusCode = 404
+                    res.setHeader("Content-Type", "application/json")
+                    res.write(JSON.stringify({
+                        msg:"book introuvable",
+                        ref : id
+                    }))
+                    res.end()
+                }
+            }).catch(e=>{
+                console.log(e)
+                send500Response(res)
+            })
+
     }
     res.statusCode = 404
     //res.setHeader("Content-Type","text/html")
