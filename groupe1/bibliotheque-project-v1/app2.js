@@ -23,8 +23,10 @@ const server = http.createServer((req, res) => {
     if ((method == "POST" || method == "PUT") && url.startsWith("/a/")) {
         let id = url.split("/")[2]
         return fs.promises.readFile("./database.json")
-            .then(data => JSON.parse(data.toString()))
-            .then(data => data.books)
+            .then(data => {
+                data = JSON.parse(data.toString())
+                return data.books
+            })
             .then(tab => tab.find(ele => ele.ref == id))
             .then(resultat => {
                 if (resultat) // resultat != undefined
@@ -38,16 +40,19 @@ const server = http.createServer((req, res) => {
                     res.statusCode = 404
                     res.setHeader("Content-Type", "application/json")
                     res.write(JSON.stringify({
-                        msg:"book introuvable",
-                        ref : id
+                        msg: "book introuvable",
+                        ref: id
                     }))
                     res.end()
                 }
-            }).catch(e=>{
+            }).catch(e => {
                 console.log(e)
                 send500Response(res)
             })
 
+    }
+    if(url.startsWith("/rem?")){
+        
     }
     res.statusCode = 404
     //res.setHeader("Content-Type","text/html")
