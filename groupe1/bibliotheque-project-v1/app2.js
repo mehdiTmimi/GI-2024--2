@@ -19,6 +19,8 @@ const server = http.createServer((req, res) => {
                 send500Response(res)
             })
     }
+    // path parameters : path params
+    // exemple http://localhost:3000/ajouteretudiant/mehdi/tmimi/32
     // http://localhost:3000/a/cd123 , http://localhost:3000/a/oook
     if ((method == "POST" || method == "PUT") && url.startsWith("/a/")) {
         let id = url.split("/")[2]
@@ -51,6 +53,7 @@ const server = http.createServer((req, res) => {
             })
 
     }
+    
     if(url.startsWith("/rem?")){
         
     }
