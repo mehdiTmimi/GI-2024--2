@@ -1,0 +1,16 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "nom": "tmimi",
+      "prenom": "mehdi",
+      "age": 32
+    },
+    {
+      "age": 70,
+      "nom": "alaoui",
+      "prenom": "hamza",
+      "id": 2
+    }
+  ]
+}
