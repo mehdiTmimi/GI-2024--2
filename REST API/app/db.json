@@ -11,6 +11,12 @@
          "nom": "rrrrrrr",
          "prenom": "qqqq",
          "age": 50
+      },
+      {
+         "id": 2,
+         "nom": "ok2",
+         "prenom": "salut2",
+         "age": 40
       }
    ]
 }

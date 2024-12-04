@@ -1,5 +1,6 @@
 const fs = require("fs")
 const dbPath = "./db.json"
+
 const save = (user) => {
     // on considere que l objet user est bien correcte
     return getAll().then(users => {
@@ -66,12 +67,13 @@ const update = async (user, id) => {
     //  .then(jsonData=>fs.promises.writeFile(dbPath,jsonData))
     //   .then(()=>true)
 }
-update({ nom: "ok", prenom: "salut", age: 50 }, 1)
+/*update({ nom: "ok", prenom: "salut", age: 50 }, 1)
     .then((resultat) => {
         if (resultat) console.log("updated with success")
         else console.log("not found")
     })
     .catch(e => console.error(e))
+    */
 module.exports = {
     save, getAll, getById, deleteById, update
 }
