@@ -56,3 +56,10 @@ response : status code 200 || 404
 le serveur renvoie un objet vide (xml ou json) ou 404 not found
 
 exercice : users ( id , nom , prenom , age) => web service (REST)
+
+
+
+
+==> deux techniques:
+XMLHttpRequest (vanilla js)
+fetch(node js et vanilla js) => promise

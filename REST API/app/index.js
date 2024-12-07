@@ -3,7 +3,7 @@ const User = require("./User.js")
 const { deleteById, getAll, getById, save, update } = require("./persistence.js")
 const PORT = 3000
 
-const server = http.createServer((req, res) => {
+const server = http.createServer(async (req, res) => {
     const { url, method } = req
     res.setHeader("Content-Type", "application/json")
 
@@ -22,9 +22,22 @@ const server = http.createServer((req, res) => {
             })
     }
     //getall with or without criteria (limit)
+    // /users?limit=10&page=3
+    // retournes les 10 users apres les 30 premier
     else if (url.toLowerCase().startsWith("/users") && method == "GET") {
+        // on supporte limit et page
+        let params = new URLSearchParams(url.split("?")[1])
+        let limit = parseInt(params.get("limit")) || -1
+        let start = parseInt(params.get("start")) || 0
+        if (start < 0)
+            start = 0
+        console.log(start,limit)
         getAll()
             .then(data => {
+                if (limit != -1)
+                    data = data.slice(start, limit+start)
+                else
+                    data = data.slice(start)
                 sendResponse(res, 200, { users: data })
             })
             .catch(e => {
@@ -68,13 +81,48 @@ const server = http.createServer((req, res) => {
     }
     //delete
     else if (url.toLowerCase().startsWith("/users/") && method == "DELETE") {
-        res.write("delete")
-        res.end()
+        let id = url.split("/")[2]
+        try {
+            let resultat = await deleteById(id)
+            if (!resultat)
+                return sendResponse(res, 404, { msg: "user can t be delete, user not found", id })
+            sendResponse(res, 200, { msg: "user deleted" })
+        }
+        catch (e) {
+            console.error(e)
+            return sendResponse(res, 500, { msg: "erreur dans le serveur" })
+        }
     }
     //UPDATE (global)
     else if (url.toLowerCase().startsWith("/users/") && method == "PUT") {
-        res.write("update global")
-        res.end()
+        let idToUpdate = url.split("/")[2]
+        let body = ""
+        req.addListener("end", () => {
+            try {
+                body = JSON.parse(body)
+
+            }
+            catch (e) {
+                return sendResponse(res, 400, { msg: "verifier que les donnes sont sous format JSON valide" })
+            }
+            let { nom, prenom, age } = body
+            // verification des champs
+            if (!nom || !prenom || !age)
+                return sendResponse(res, 400, { msg: "veuillez indiquer le id, nom, prenom et age" })
+
+            update({ nom, prenom, age }, idToUpdate).then(async resultat => {
+                if (resultat)
+                    return sendResponse(res, 200, { msg: "user updated", id: idToUpdate })
+                sendResponse(res, 404, { msg: "user not found", id: idToUpdate })
+            })
+                .catch(e => {
+                    console.error(e)
+                    sendResponse(res, 500, { msg: "erreur dans le serveur" })
+                })
+        })
+        req.on("data", (chunk) => {
+            body += chunk.toString()
+        })
     }
     //UPDATE (partiel)
     else if (url.toLowerCase().startsWith("/users/") && method == "PATCH") {
