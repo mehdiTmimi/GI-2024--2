@@ -11,15 +11,15 @@ import java.net.http.HttpResponse;
 public class Teste {
 
 	public Teste() {
-		 String apiUrl = "http://localhost:3000/users/1"; 
+		 String apiUrl = "http://localhost:3000/users/9"; 
 		 
-	        
+	        System.out.println("TESTE");
 	        HttpClient client = HttpClient.newHttpClient();
 
 	       
 	        HttpRequest request = HttpRequest.newBuilder()
 	                .uri(URI.create(apiUrl))
-	                .GET() 
+	                .DELETE() 
 	                .build();
 
 	      
