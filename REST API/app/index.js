@@ -5,8 +5,18 @@ const PORT = 3000
 
 const server = http.createServer(async (req, res) => {
     const { url, method } = req
+    console.log(url,method)
+    
     res.setHeader("Content-Type", "application/json")
-
+    res.setHeader("Access-Control-Allow-Origin","*")
+    res.setHeader("Access-Control-Allow-Headers", "Content-Type" )
+    res.setHeader("Access-Control-Allow-Methods","OPTIONS, GET, DELETE, POST, PUT")
+    if(req.method=="OPTIONS"){
+        console.log("ok")
+        res.writeHead(200)
+       return res.end()
+    }
+   // res.setHeader("Access-Control-Allow-Origin","http://localhost:5500")
     //get one single user
     if (url.toLowerCase().startsWith("/users/") && method == "GET") {
         let id = url.split("/")[2]
